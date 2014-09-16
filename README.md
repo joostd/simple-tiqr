@@ -1,14 +1,15 @@
 simple-tiqr
 ===========
 
-Simple demo project explaining the use of the tiqr php library
-
+Simple demo project explaining the use of the tiqr php library.
 
 Many shortcuts:
 
 - no dependencies except the tiqr libraries
-- uses google chart api instead of phpqrencode
+- uses google chart api instead of phpqrencode (bad idea except for testing/demo purposes!)
 - using error_log for logging
+
+Goal is to have a simple tiqr demo that can be run with the php builtin web server.
 
 Install
 ===
