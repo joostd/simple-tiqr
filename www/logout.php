@@ -1,6 +1,5 @@
 <?php
 
-include('Tiqr/Service.php');
 include('../options.php');
 
 session_start();
