@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__.'/vendor/joostd/tiqr-server/libTiqr/library/tiqr/Tiqr/AutoLoader.php';
+require_once __DIR__.'/vendor/joostd/tiqr-server-libphp/library/tiqr/Tiqr/AutoLoader.php';
 
 $options = array(
 //    "identifier"      => "demo.tiqr.org",
@@ -10,24 +10,18 @@ $options = array(
     "ocra.suite"          => "OCRA-1:HOTP-SHA1-6:QH10-S",
     "logoUrl"         => "https://demo.tiqr.org/img/tiqrRGB.png",
     "infoUrl"         => "https://www.tiqr.org",
-    "tiqr.path"           => __DIR__ . "/vendor/joostd/tiqr-server/libTiqr/library/tiqr",
+    "tiqr.path"           => __DIR__ . "/vendor/joostd/tiqr-server-libphp/library/tiqr",
     'phpqrcode.path' => '.',	// not used
     'zend.path' => '.',	// not used
     "statestorage"        => array("type" => "file"),
     "userstorage"         => array("type" => "file", "path" => "/tmp", "encryption" => array('type' => 'dummy')),
+    // "userstorage"         => array("type" => "pdo", 'dsn' => 'sqlite:/tmp/tiqr.sq3', 'table' => 'user', "encryption" => array('type' => 'dummy')),
 );
 
 $autoloader = Tiqr_AutoLoader::getInstance($options); // needs {tiqr,zend,phpqrcode}.path
 $autoloader->setIncludePath();
 
-$userStorage = Tiqr_UserStorage::getStorage("file", array("path"=>"/tmp"));
-
-$nouserStorage = Tiqr_UserStorage::getStorage("pdo", array(
-        'table' => 'user',
-        'dsn' => 'sqlite:/tmp/tiqr.sq3',
-        'username' => 'rw',
-        'password' => 's3cr3t',
-    ));
+$userStorage = Tiqr_UserStorage::getStorage($options['userstorage']['type'], $options['userstorage']);
 
 function base() {
     $proto = "http";

@@ -1,20 +1,20 @@
 {
     "require": {
-        "joostd/tiqr-server": "dev-master"
+        "joostd/tiqr-server-libphp": "dev-master"
     },
     "repositories": [
         {
             "type":"package",
             "package": {
                 "version":"dev-master",
-                "name":"joostd/tiqr-server",
+                "name":"joostd/tiqr-server-libphp",
                 "source": {
-                    "url":"https://github.com/joostd/tiqr-server.git",
+                    "url":"https://github.com/joostd/tiqr-server-libphp.git",
                     "type":"git",
                     "reference":"master"
                 },
                 "dist": {
-                    "url":"https://github.com/joostd/tiqr-server/zipball/master",
+                    "url":"https://github.com/joostd/tiqr-server-libphp/zipball/master",
                     "type":"zip"
                 }
             }
