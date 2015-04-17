@@ -25,6 +25,7 @@ Run from the command line using PHP 5.4+ built-in HTTP server:
 	php -S ip:port -t www
 
 where ip is an IP address you're tiqr client can connect to (127.0.0.1 won't do if you want to use the tiqr app).
+Use 0.0.0.0 to listen on any interface.
 Connect your phone to the same WiFi network your demo server is running on to be able to use the demo.
 Port is typically 8080 (80 requires root).
 

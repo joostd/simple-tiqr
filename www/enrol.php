@@ -37,6 +37,7 @@ if( isset($_POST['uid']) and isset($_POST['displayName'])) {
 <html>
 <head>
     <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+    <script type="text/javascript" src="qrcode.min.js"></script>
     <script type="text/javascript">
         const idle        = "<?php echo Tiqr_Service::ENROLLMENT_STATUS_IDLE ?>";
         const initialized = "<?php echo Tiqr_Service::ENROLLMENT_STATUS_INITIALIZED ?>";
@@ -90,10 +91,19 @@ if( isset($_POST['uid']) and isset($_POST['displayName'])) {
         <input type="submit"/>
     </form>
 <?php else: ?>
-    <img alt="QR" src='<?php echo $qr; ?>'/>
+    <div id="qrcode"></div>
+    <script type="text/javascript">
+        var url = '<?php echo $url; ?>';
+        new QRCode("qrcode", {
+            text: url,
+            correctLevel : QRCode.CorrectLevel.L
+        });
+    </script>
     <script type="text/javascript">
         jQuery(document).ready(enrolStatus);
     </script>
+    <!-- img alt="QR" src='<?php echo $qr; ?>'/ -->
+
 <?php endif; ?>
 
 </body>
