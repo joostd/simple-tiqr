@@ -43,8 +43,13 @@ if( !is_null($userdata) ) {
     $translatedAddress = $tiqr->translateNotificationAddress($notificationType, $notificationAddress);
     error_log("translated address [$translatedAddress]");
     if ($translatedAddress) {
-//      $tiqr->sendAuthNotification($sid,'APNS','8CE152EB262EC333ECD5B8EE7C5A3C23F94EDBDF1F6E530C87BFBEA7D9C6CA86');
-        $tiqr->sendAuthNotification($sessionKey, $notificationType, $translatedAddress);
+        if( $tiqr->sendAuthNotification($sessionKey, $notificationType, $translatedAddress) ) {
+            error_log("sent notification of type [$notificationType] to [$translatedAddress]");
+        } else {
+            error_log("failed sending notification of type [$notificationType] to [$translatedAddress]");
+        }
+    } else {
+        error_log("Could not translate address [$notificationAddress] for notification of type [$notificationType]");
     }
 }
 
