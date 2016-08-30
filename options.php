@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__.'/vendor/joostd/tiqr-server-libphp/library/tiqr/Tiqr/AutoLoader.php';
+require_once __DIR__.'/vendor/tiqr/tiqr-server-libphp/library/tiqr/Tiqr/AutoLoader.php';
 
 $options = array(
 //    "identifier"      => "demo.tiqr.org",
@@ -10,7 +10,7 @@ $options = array(
     "ocra.suite"          => "OCRA-1:HOTP-SHA1-6:QH10-S",
     "logoUrl"         => "https://demo.tiqr.org/img/tiqrRGB.png",
     "infoUrl"         => "https://www.tiqr.org",
-    "tiqr.path"           => __DIR__ . "/vendor/joostd/tiqr-server-libphp/library/tiqr",
+    "tiqr.path"           => __DIR__ . "/vendor/tiqr/tiqr-server-libphp/library/tiqr",
     'phpqrcode.path' => '.',	// not used
     'zend.path' => __DIR__ . '/vendor/zendframework/zendframework1/library',	// used for push notifications
     "statestorage"        => array("type" => "file"),
@@ -39,9 +39,12 @@ $autoloader->setIncludePath();
 $userStorage = Tiqr_UserStorage::getStorage($options['userstorage']['type'], $options['userstorage']);
 
 function base() {
-    $proto = "http://";
-    return $proto . $_SERVER['HTTP_HOST'];
-    return $baseUrl;
+    $proto = "https://";
+    if( array_key_exists('HTTP_X_FORWARDED_HOST', $_SERVER) )
+	$host = $_SERVER['HTTP_X_FORWARDED_HOST'];
+    else
+	$host = $_SERVER['HTTP_HOST'];
+    return $proto . $host;
 }
 
 function generate_id($length = 8) {
